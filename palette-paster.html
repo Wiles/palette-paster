@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Palette Paster</title>
+    <style>
+      table, th, td {
+        border: 1px solid black;
+      }
+      td {
+        width: 100px;
+      }
+      textarea {
+        width: 200px;
+        height: 200px;
+      }
+    </style>
+  </head>
+  <body>
+    <form>
+      <input type='submit' value='submit' />
+      <br />
+      <textarea id='colorInput' name='colors'></textarea>
+    </form>
+    <table id='colors'>
+    </table>
+
+    <script>
+      (function() {
+        const params = (new URL(document.location)).searchParams;
+        const colors = params.get("colors");
+
+        document.getElementById('colorInput').value = colors;
+
+        const table = document.getElementById('colors')
+
+        colors.split('\n').forEach((color) => {
+          const tr = document.createElement('tr');
+          table.append(tr);
+
+          let td = document.createElement('td');
+          td.innerHTML = color;
+          td.text = color;
+          tr.append(td);
+
+          td = document.createElement('td');
+          td.style.backgroundColor = color;
+          tr.append(td);
+        });
+      })();
+    </script>
+  </body>
+</html>
